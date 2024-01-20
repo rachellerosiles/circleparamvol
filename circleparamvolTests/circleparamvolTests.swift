@@ -24,7 +24,39 @@ final class circleparamvolTests: XCTestCase {
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
+    
+    func testSphereSurfaceArea() async throws {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let mysphere = sphere()
+        
+        let radius = 3.0
+        let _ = mysphere.initSphere(myradius: radius)
+        
+        let area = await mysphere.calcSurfaceArea()
+        
+        XCTAssertEqual(area.Value, 113.0973355292, accuracy: 1.0E-7, "Was not equal to this resolution.")
+        
+        
+    }
 
+    func testSphereVolume() async throws {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let mysphere = sphere()
+        
+        let radius = 2.0
+        let _ = mysphere.initSphere(myradius: radius)
+        
+        let volume = await mysphere.calcVolume()
+        
+        XCTAssertEqual(volume.Value, 33.51032163829, accuracy: 1.0E-7, "Was not equal to this resolution.")
+        
+        
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         measure {
