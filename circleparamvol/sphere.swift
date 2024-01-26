@@ -16,9 +16,9 @@ import Foundation
     var areaText = ""
     var enableButton = true
     
-    /// <#Description#>
-    /// - Parameter myradius: <#myradius description#>
-    /// - Returns: <#description#>
+    /// Initializes 3D sphere object and contains the threading
+    /// - Parameter myradius: radius of the sphere, type double
+    /// - Returns: boolean value true when created
     func initSphere(myradius: Double) -> Bool {
         radius = myradius
         
@@ -68,30 +68,31 @@ import Foundation
         return true
     }
     
-    /// <#Description#>
-    /// - Returns: <#description#>
+    /// Calculates the volume of the sphere using the equation 4/3*pi* r^3
+    /// - Returns: an array describing the caluculated volume of the sphere
     func calcVolume() async -> (Type: String, StringToDisplay: String, Value: Double) {
         volume = 4/3 * Double.pi * pow(radius, 3)
         let volumeText = "\(volume.formatted(.number.precision(.fractionLength(7))))"
         return (Type: "Volume of Sphere", StringToDisplay: volumeText, Value: volume)
     }
     
+    /// Calculates the surface area of the sphere using 4* pi * r^2
+    /// - Returns: an array describing the calculated surface area of the sphere
     func calcSurfaceArea() async -> (Type: String, StringToDisplay: String, Value: Double) {
         surfaceArea = 4 * Double.pi * pow(radius, 2)
         let surfaceAreaText = "\(surfaceArea.formatted(.number.precision(.fractionLength(7))))"
         return (Type: "Surface Area of Sphere", StringToDisplay: surfaceAreaText, Value: surfaceArea)
     }
     
+    /// Executes on main thread
+    /// - Parameter state: updates state of button
     @MainActor func setButtonEnable(state: Bool){
-        
-        
         if state {
             Task.init {
                 await MainActor.run {
                     self.enableButton = true
                 }
             }
-                
         }
         else{
             Task.init {
@@ -99,40 +100,33 @@ import Foundation
                     self.enableButton = false
                 }
             }
-                
         }
-        
     }
     
     /// updateArea
     /// Executes on the main thread
     /// - Parameter areaTextString: Text describing the value of the area
     @MainActor func updateArea(areaTextString: String){
-        
         areaText = areaTextString
-        
     }
     
+    /// retrieves surface area
+    /// - Parameter areaValue: double displaying value of surface area
     @MainActor func newSurfaceAreaValue(areaValue: Double){
-        
         self.surfaceArea = areaValue
-        
     }
     
+    /// retrieves volume
+    /// - Parameter volumeValue: double value displaying value of volume
     @MainActor func newVolumeValue(volumeValue: Double){
-        
         self.volume = volumeValue
-        
     }
     
     /// updatePerimeter
     /// Executes on the main thread
     /// - Parameter perimeterTextString: Text describing the value of the perimeter
     @MainActor func updatePerimeter(perimeterTextString:String){
-        
         perimeterText = perimeterTextString
-        
-        
     }
     
 }

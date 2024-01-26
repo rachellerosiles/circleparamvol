@@ -45,43 +45,39 @@ struct ContentView: View {
                         .padding(.bottom,30)
                 }
             }
-           /* HStack{  //cube calculations
+            HStack {  //cube calculations
                 VStack{
                     Text("Cube Volume")
                         .padding(.bottom, 0)
-                    TextField("", text: ( $circleModel.perimeterText))
-                        .padding(.horizontal)
-                        .frame(width: 100)
-                        .padding(.top, 0)
-                        .padding(.bottom, 30)
-                }
-                VStack{
-                    Text("Cube Surface Area")
-                        .padding(.bottom, 0)
-                    Text("\(circleModel.perimeter, specifier: "%.2f")")
+                    Text("\(cubeModel.volume, specifier: "%.2f")")
                         .padding(.horizontal)
                         .frame(width: 100)
                         .padding(.top, 0)
                         .padding(.bottom,30)
                     
+                    Text("Cube Surface Area")
+                        .padding(.bottom, 0)
+                    
+                    Text("\(cubeModel.surfaceArea, specifier: "%.2f")")
+                        .padding(.horizontal)
+                        .frame(width: 100)
+                        .padding(.top, 0)
+                        .padding(.bottom,30)
                 }
-                
-                
-                
             }
-            */
+            
             Button("Calculate", action: {self.calculate()})
                 .padding(.bottom)
                 .padding()
                // .disabled(circleModel.enableButton == false)
         }
             
-        }
+    }
         
         func calculate() {
             let myradius = Double(radiusString)!
             let _ = sphereModel.initSphere(myradius: myradius)
-            
+            let _ = cubeModel.initBox(myLength: 2*myradius, myWidth: 2*myradius, myHeight: 2*myradius)
         }
         
 }
